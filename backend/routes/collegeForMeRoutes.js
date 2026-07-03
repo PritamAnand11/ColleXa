@@ -1,8 +1,3 @@
-// ============================================================
-// collegeForMeRoutes.js
-// Place at: backend/routes/collegeForMeRoutes.js
-// ============================================================
-
 import express from "express";
 import { getCollegeRecommendations } from "../controllers/collegeForMeController.js";
 
