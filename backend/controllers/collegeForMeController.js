@@ -1,8 +1,3 @@
-// ============================================================
-// collegeForMeController.js
-// Place at: backend/controllers/collegeForMeController.js
-// ============================================================
-
 import Groq from "groq-sdk";
 
 let groqClient = null;
