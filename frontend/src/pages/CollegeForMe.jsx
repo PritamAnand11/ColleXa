@@ -1,9 +1,3 @@
-// ============================================================
-// CollegeForMe.jsx
-// Place at: frontend/src/pages/CollegeForMe.jsx
-// Route:    /college-for-me   (add in App.jsx)
-// ============================================================
-
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
