@@ -1,17 +1,10 @@
 import { createContext, useState, useEffect } from "react";
-
 export const SearchContext = createContext();
-
 export const SearchProvider = ({ children }) => {
-
   const [history, setHistory] = useState([]);
-
   useEffect(() => {
-
     const saved = localStorage.getItem("searchHistory");
-
     if (saved) setHistory(JSON.parse(saved));
-
   }, []);
 
   const saveSearchHistory = (term) => {
