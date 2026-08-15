@@ -34,8 +34,6 @@ await CollegeDomain.insertMany([
   collegeName: "Lloyd Institute of Engineering & Technology",
   domains: ["liet.in"]
 }
-  // Add your own colleges with their domains below:
-  // { collegeName: "Your College", domains: ["yourcollege.ac.in"] },
 ]);
 console.log("College domains seeded successfully!");
 await mongoose.disconnect();
