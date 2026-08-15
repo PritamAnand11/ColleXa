@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
 import dotenv   from "dotenv";
 import CollegeDomain from "./models/CollegeDomain.js";
-
 dotenv.config();
 await mongoose.connect(process.env.MONGO_URI);
 await CollegeDomain.deleteMany({});
-
 await CollegeDomain.insertMany([
   { collegeName: "IIT Bombay",          domains: ["iitb.ac.in", "iitbombay.ac.in"] },
   { collegeName: "IIT Delhi",           domains: ["iitd.ac.in"] },
@@ -39,6 +37,5 @@ await CollegeDomain.insertMany([
   // Add your own colleges with their domains below:
   // { collegeName: "Your College", domains: ["yourcollege.ac.in"] },
 ]);
-
-console.log("✅ College domains seeded successfully!");
+console.log("College domains seeded successfully!");
 await mongoose.disconnect();
