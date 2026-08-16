@@ -8,20 +8,15 @@ export const SearchProvider = ({ children }) => {
   }, []);
 
   const saveSearchHistory = (term) => {
-
     if (!term) return;
-
     const newHistory = [term, ...history.filter(h => h !== term)];
 
-    setHistory(newHistory);
-
+    setHistory(newHistory)
     localStorage.setItem(
       "searchHistory",
       JSON.stringify(newHistory)
     );
-
   };
-
   return (
     <SearchContext.Provider
       value={{ history, saveSearchHistory }}
