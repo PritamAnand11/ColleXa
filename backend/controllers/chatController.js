@@ -1,5 +1,3 @@
-// backend/controllers/chatController.js
-
 import Groq from "groq-sdk";
 
 let groqClient = null;
@@ -47,7 +45,6 @@ export const chat = async (req, res) => {
       max_tokens: 600,
     });
 
-    // Post-process: replace any remaining "* " bullets with "- "
     let reply = completion.choices[0]?.message?.content || "Sorry, I couldn't generate a response.";
     reply = reply.replace(/^\* /gm, "- ").replace(/^  \* /gm, "  - ");
 
