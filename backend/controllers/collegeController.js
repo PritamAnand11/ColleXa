@@ -1,15 +1,6 @@
-// backend/controllers/collegeController.js
-
 import mongoose from "mongoose";
 import { analyzeReviewsWithGemini } from "../services/geminiService.js";
 
-
-/* =========================================================
-   HELPER — normalise an id into both forms for $or queries
-   Some colleges were inserted with a plain-string _id,
-   others with a proper ObjectId.  Every query that filters
-   by _id or collegeId must handle both.
-========================================================= */
 const idFilter = (id) => {
   const isValid = mongoose.Types.ObjectId.isValid(id);
   const objectId = isValid ? new mongoose.Types.ObjectId(id) : null;
@@ -28,10 +19,6 @@ const collegeIdFilter = (id) => {
     : { collegeId: id };
 };
 
-
-/* =========================================================
-   GET ALL COLLEGES WITH SEARCH SUPPORT
-========================================================= */
 export const getColleges = async (req, res) => {
   try {
     const db = mongoose.connection.db;
@@ -61,10 +48,6 @@ export const getColleges = async (req, res) => {
   }
 };
 
-
-/* =========================================================
-   GET SINGLE COLLEGE BY ID
-========================================================= */
 export const getCollegeById = async (req, res) => {
   try {
     const collegeId = req.params.id;
@@ -79,9 +62,6 @@ export const getCollegeById = async (req, res) => {
 
     const db = mongoose.connection.db;
 
-    /* =====================================================
-       FETCH COLLEGE — handles both string & ObjectId _id
-    ===================================================== */
     const college = await db
       .collection("colleges")
       .findOne(idFilter(collegeId));
@@ -91,11 +71,6 @@ export const getCollegeById = async (req, res) => {
       return res.status(404).json({ message: "College not found" });
     }
 
-    console.log("College FOUND:", college.name);
-
-    /* =====================================================
-       FETCH REVIEWS — handles both string & ObjectId collegeId
-    ===================================================== */
     const reviews = await db
       .collection("reviews")
       .find(collegeIdFilter(collegeId))
@@ -104,9 +79,6 @@ export const getCollegeById = async (req, res) => {
 
     console.log("Reviews found:", reviews.length);
 
-    /* =====================================================
-       PREPARE REVIEW TEXTS FOR GEMINI
-    ===================================================== */
     const reviewTexts = reviews.map(
       (r) => `
 College: ${r.collegeName || ""}
@@ -123,9 +95,6 @@ Overall Rating: ${r.overallRating || ""}
 
     console.log("Review texts prepared:", reviewTexts.length);
 
-    /* =====================================================
-       DETERMINE IF AI ANALYSIS NEEDS (RE)GENERATION
-    ===================================================== */
     const existing = !forceRefresh ? college.aiAnalysis : null;
 
     const isStaleOrEmpty =
@@ -138,9 +107,6 @@ Overall Rating: ${r.overallRating || ""}
 
     let aiAnalysis = existing || null;
 
-    /* =====================================================
-       GENERATE AI ANALYSIS IF NEEDED
-    ===================================================== */
     if (isStaleOrEmpty && reviewTexts.length > 0) {
       console.log("Generating AI analysis using Gemini...");
 
@@ -149,7 +115,6 @@ Overall Rating: ${r.overallRating || ""}
       if (generated && generated.pros && generated.pros.length > 0) {
         aiAnalysis = { ...generated, lastUpdated: new Date() };
 
-        // Update using the same dual-type filter so the write always lands
         await db
           .collection("colleges")
           .updateOne(idFilter(collegeId), {
@@ -169,9 +134,6 @@ Overall Rating: ${r.overallRating || ""}
       console.log("Using cached AI analysis from database");
     }
 
-    /* =====================================================
-       FALLBACK IF STILL NO AI DATA
-    ===================================================== */
     if (!aiAnalysis) {
       aiAnalysis = {
         pros: [],
@@ -182,9 +144,6 @@ Overall Rating: ${r.overallRating || ""}
       };
     }
 
-    /* =====================================================
-       SEND RESPONSE
-    ===================================================== */
     res.status(200).json({ college, reviews, aiAnalysis });
   } catch (error) {
     console.error("Get college error:", error);
@@ -192,10 +151,6 @@ Overall Rating: ${r.overallRating || ""}
   }
 };
 
-
-/* =========================================================
-   CREATE COLLEGE
-========================================================= */
 export const createCollege = async (req, res) => {
   try {
     const db = mongoose.connection.db;
@@ -228,10 +183,6 @@ export const createCollege = async (req, res) => {
   }
 };
 
-
-/* =========================================================
-   UPDATE COLLEGE
-========================================================= */
 export const updateCollege = async (req, res) => {
   try {
     const collegeId = req.params.id;
@@ -259,10 +210,6 @@ export const updateCollege = async (req, res) => {
   }
 };
 
-
-/* =========================================================
-   DELETE COLLEGE
-========================================================= */
 export const deleteCollege = async (req, res) => {
   try {
     const collegeId = req.params.id;
@@ -275,7 +222,6 @@ export const deleteCollege = async (req, res) => {
 
     await db.collection("colleges").deleteOne(idFilter(collegeId));
 
-    // Delete all associated reviews too
     await db.collection("reviews").deleteMany(collegeIdFilter(collegeId));
 
     res.status(200).json({ message: "College deleted successfully" });
