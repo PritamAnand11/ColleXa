@@ -12,7 +12,6 @@ const getGroq = () => {
   return groqClient;
 };
 
-// ── Label maps for readable prompt ───────────────────────────
 const INTEREST_LABELS = {
   tech: "Technology & Software Development",
   finance: "Finance, Economics & Business",
@@ -63,7 +62,6 @@ const PRIORITY_LABELS = {
   brand: "Brand name & prestige",
 };
 
-// ── Build prompt from answers ─────────────────────────────────
 const buildPrompt = (answers) => {
   const interests = (answers.interests || []).map((v) => INTEREST_LABELS[v] || v).join(", ");
   const strengths = (answers.strengths || []).map((v) => STRENGTH_LABELS[v] || v).join(", ");
@@ -112,7 +110,6 @@ Rules:
 `;
 };
 
-// ── Controller ────────────────────────────────────────────────
 export const getCollegeRecommendations = async (req, res) => {
   try {
     const { answers } = req.body;
