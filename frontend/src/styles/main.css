@@ -1,7 +1,3 @@
-/* ============================= */
-/* THEME VARIABLES               */
-/* ============================= */
-
 :root {
   --primary:      #6c4cff;
   --secondary:    #00c6a9;
@@ -20,11 +16,6 @@
   --card-solid:   rgba(30,41,59,0.9);
 }
 
-
-/* ============================= */
-/* GLOBAL                        */
-/* ============================= */
-
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
@@ -42,11 +33,6 @@ body {
     box-shadow  0.25s ease,
     transform   0.25s ease;
 }
-
-
-/* ============================= */
-/* NAVBAR                        */
-/* ============================= */
 
 .navbar-wrapper {
   display: flex;
@@ -94,11 +80,6 @@ body {
   color: var(--primary);
 }
 
-
-/* ============================= */
-/* THEME TOGGLE                  */
-/* ============================= */
-
 .theme-toggle {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -112,11 +93,6 @@ body {
 .theme-toggle:hover {
   transform: scale(1.08);
 }
-
-
-/* ============================= */
-/* HERO                          */
-/* ============================= */
 
 .hero {
   height: 450px;
@@ -141,22 +117,12 @@ body {
   color: white;
 }
 
-
-/* ============================= */
-/* GRID                          */
-/* ============================= */
-
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
   padding: 40px;
 }
-
-
-/* ============================= */
-/* CARD                          */
-/* ============================= */
 
 .card {
   background: var(--glass-bg);
@@ -195,11 +161,6 @@ body {
   margin: 0;
 }
 
-
-/* ============================= */
-/* RATING CIRCLE                 */
-/* ============================= */
-
 .rating-circle {
   width: 70px;
   height: 70px;
@@ -223,11 +184,6 @@ body {
   height: 100px;
   font-size: 22px;
 }
-
-
-/* ============================= */
-/* SEARCH                        */
-/* ============================= */
 
 .search-container {
   display: flex;
@@ -296,11 +252,6 @@ body {
   color: #ef4444;
 }
 
-
-/* ============================= */
-/* BUTTONS                       */
-/* ============================= */
-
 .search-btn,
 .google-btn,
 .favorite-btn {
@@ -318,11 +269,6 @@ body {
 .favorite-btn:hover {
   transform: translateY(-2px);
 }
-
-
-/* ============================= */
-/* SKELETON                      */
-/* ============================= */
 
 .skeleton {
   background: linear-gradient(90deg, #eee, #ddd, #eee);
@@ -345,11 +291,6 @@ body {
   from { background-position:  200% 0; }
   to   { background-position: -200% 0; }
 }
-
-
-/* ============================= */
-/* SIDEBAR                       */
-/* ============================= */
 
 .sidebar {
   position: fixed;
@@ -388,11 +329,6 @@ body {
   margin-bottom: 20px;
 }
 
-
-/* ============================= */
-/* FLOATING ANIMATION            */
-/* ============================= */
-
 .floating {
   animation: float 4s ease-in-out infinite;
 }
@@ -401,11 +337,6 @@ body {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-10px); }
 }
-
-
-/* ============================= */
-/* MOBILE                        */
-/* ============================= */
 
 @media (max-width: 768px) {
 
