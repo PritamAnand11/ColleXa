@@ -1,4 +1,3 @@
-
 import React, { useContext, useState } from "react";
 import {
   BrowserRouter,
@@ -31,9 +30,6 @@ import AddReview from "./pages/AddReview";
 
 import AdminRoute from "./components/AdminRoute";
 
-/* =====================================================
-   PROTECTED HOME
-===================================================== */
 function ProtectedHome({ children }) {
   const { user } = useContext(AuthContext);
 
@@ -44,9 +40,6 @@ function ProtectedHome({ children }) {
   return children;
 }
 
-/* =====================================================
-   ANIMATED ROUTES
-===================================================== */
 function AnimatedRoutes() {
   const location = useLocation();
 
@@ -105,10 +98,6 @@ function AnimatedRoutes() {
     </AnimatePresence>
   );
 }
-
-/* =====================================================
-   APP ROOT
-===================================================== */
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
