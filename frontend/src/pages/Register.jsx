@@ -1,14 +1,9 @@
-// frontend/src/pages/Register.jsx
-
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-/* =========================================================
-   STYLES — fully self-contained, won't affect other pages
-========================================================= */
 const S = {
   page: {
     minHeight: "100vh",
@@ -17,7 +12,6 @@ const S = {
     background: "#f0f2ff",
   },
 
-  /* ── Left panel ── */
   left: {
     flex: "0 0 48%",
     background: "linear-gradient(145deg, #5b4ff5 0%, #7c3aed 50%, #4f46e5 100%)",
@@ -129,7 +123,6 @@ const S = {
     fontWeight: 500,
   },
 
-  /* ── Right panel ── */
   right: {
     flex: 1,
     display: "flex",
@@ -165,7 +158,6 @@ const S = {
     lineHeight: 1.6,
   },
 
-  /* ── Input group ── */
   inputGroup: {
     marginBottom: 18,
   },
@@ -206,7 +198,6 @@ const S = {
     transition: "border-color 0.2s, box-shadow 0.2s",
   },
 
-  /* ── Submit button ── */
   btn: {
     width: "100%",
     padding: "14px",
@@ -224,7 +215,6 @@ const S = {
     transition: "transform 0.2s, box-shadow 0.2s",
   },
 
-  /* ── Footer ── */
   footer: {
     marginTop: 28,
     textAlign: "center",
@@ -237,7 +227,6 @@ const S = {
     textDecoration: "none",
   },
 
-  /* ── Error ── */
   errorBox: {
     background: "rgba(239,68,68,0.08)",
     border: "1px solid rgba(239,68,68,0.2)",
@@ -256,9 +245,6 @@ const FEATURES = [
   { icon: "📊", text: "Compare colleges side by side" },
 ];
 
-/* =========================================================
-   COMPONENT
-========================================================= */
 export default function Register() {
   const [name,     setName]     = useState("");
   const [email,    setEmail]    = useState("");
