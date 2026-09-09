@@ -1,12 +1,7 @@
-// frontend/src/pages/Login.jsx
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-/* =========================================================
-   STYLES
-========================================================= */
 const S = {
   page: {
     minHeight: "100vh",
@@ -14,7 +9,6 @@ const S = {
     fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
   },
 
-  /* ── Left: Form panel ── */
   left: {
     flex: "0 0 52%",
     background: "#ffffff",
@@ -63,7 +57,6 @@ const S = {
     lineHeight: 1.6,
   },
 
-  /* ── Google button ── */
   googleBtn: {
     width: "100%",
     padding: "14px 20px",
@@ -84,7 +77,6 @@ const S = {
     boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
   },
 
-  /* ── Divider ── */
   divider: {
     display: "flex",
     alignItems: "center",
@@ -103,7 +95,6 @@ const S = {
     letterSpacing: "0.5px",
   },
 
-  /* ── Email button ── */
   emailBtn: {
     width: "100%",
     padding: "14px 20px",
@@ -120,7 +111,6 @@ const S = {
     transition: "transform 0.2s, box-shadow 0.2s",
   },
 
-  /* ── Footer ── */
   footer: {
     marginTop: 32,
     fontSize: 14,
@@ -134,7 +124,6 @@ const S = {
     marginLeft: 4,
   },
 
-  /* ── Right: Illustration panel ── */
   right: {
     flex: 1,
     background: "linear-gradient(145deg, #7c3aed 0%, #5b4ff5 40%, #8b5cf6 100%)",
@@ -147,7 +136,6 @@ const S = {
     overflow: "hidden",
   },
 
-  /* decorative circles */
   circle1: {
     position: "absolute",
     top: -80,
@@ -179,7 +167,6 @@ const S = {
     pointerEvents: "none",
   },
 
-  /* floating icon grid */
   iconGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)",
@@ -256,27 +243,21 @@ const STATS = [
   { num: "4.8★", label: "Rated" },
 ];
 
-/* =========================================================
-   COMPONENT
-========================================================= */
 export default function Login() {
   return (
     <div style={S.page}>
 
-      {/* ════ LEFT: Form ════ */}
       <motion.div
         style={S.left}
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Brand */}
         <div style={S.brandRow}>
           <div style={S.brandIcon}>🎓</div>
           <span style={S.brandName}>Collexa</span>
         </div>
 
-        {/* Heading */}
         <motion.h1
           style={S.heading}
           initial={{ opacity: 0, y: 16 }}
