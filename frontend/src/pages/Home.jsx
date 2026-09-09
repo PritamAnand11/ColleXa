@@ -21,10 +21,6 @@
     const debounceRef = useRef(null);
     const dropdownRef = useRef(null);
 
-
-    /* =====================================================
-      LOAD SEARCH HISTORY
-    ===================================================== */
     useEffect(() => {
 
       const saved = localStorage.getItem("searchHistory");
@@ -35,10 +31,6 @@
 
     }, []);
 
-
-    /* =====================================================
-      SAVE SEARCH HISTORY
-    ===================================================== */
     const saveSearchHistory = (term) => {
 
       if (!term.trim()) return;
@@ -60,10 +52,6 @@
 
     };
 
-
-    /* =====================================================
-      REMOVE HISTORY ITEM
-    ===================================================== */
     const removeHistory = (term) => {
 
       const newHistory = history.filter(item => item !== term);
@@ -77,10 +65,6 @@
 
     };
 
-
-    /* =====================================================
-      FETCH COLLEGES
-    ===================================================== */
     const fetchColleges = async (search = "") => {
 
       try {
@@ -107,10 +91,6 @@
 
     };
 
-
-    /* =====================================================
-      AUTO SEARCH FROM URL
-    ===================================================== */
     useEffect(() => {
 
       const params = new URLSearchParams(location.search);
@@ -129,10 +109,6 @@
 
     }, [location.search]);
 
-
-    /* =====================================================
-      AUTO SEARCH WITH DEBOUNCE
-    ===================================================== */
     useEffect(() => {
 
       if (!searchTerm.trim()) return;
@@ -153,10 +129,6 @@
 
     }, [searchTerm]);
 
-
-    /* =====================================================
-      SEARCH BUTTON CLICK
-    ===================================================== */
     const handleSearch = () => {
 
       if (!searchTerm.trim()) return;
@@ -177,10 +149,6 @@
 
     };
 
-
-    /* =====================================================
-      CLICK HISTORY ITEM
-    ===================================================== */
     const handleHistoryClick = (term) => {
 
       setSearchTerm(term);
@@ -201,10 +169,6 @@
 
     };
 
-
-    /* =====================================================
-      ENTER KEY SUPPORT
-    ===================================================== */
     const handleKeyDown = (e) => {
 
       if (e.key === "Enter") {
@@ -213,10 +177,6 @@
 
     };
 
-
-    /* =====================================================
-      CLOSE DROPDOWN OUTSIDE CLICK
-    ===================================================== */
     useEffect(() => {
 
       const handleClickOutside = (event) => {
@@ -240,10 +200,6 @@
 
     }, []);
 
-
-    /* =====================================================
-      ERROR STATE
-    ===================================================== */
     if (error) {
 
       return (
@@ -254,9 +210,6 @@
 
     }
 
-
-
-    
     return (
 
       <div>
