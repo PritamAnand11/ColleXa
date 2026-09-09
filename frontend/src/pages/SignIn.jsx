@@ -1,15 +1,9 @@
-// frontend/src/pages/SignIn.jsx
-// (also works as Login.jsx — just rename if needed)
-
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-/* =========================================================
-   STYLES — mirrors Register.jsx design exactly
-========================================================= */
 const S = {
   page: {
     minHeight: "100vh",
@@ -18,7 +12,6 @@ const S = {
     background: "#f0f2ff",
   },
 
-  /* ── Left panel ── */
   left: {
     flex: "0 0 48%",
     background: "linear-gradient(145deg, #5b4ff5 0%, #7c3aed 50%, #4f46e5 100%)",
@@ -275,9 +268,6 @@ const FEATURES = [
   { icon: "📊", text: "Compare colleges side by side" },
 ];
 
-/* =========================================================
-   COMPONENT
-========================================================= */
 export default function SignIn() {
   const [email,    setEmail]    = useState("");
   const [password, setPassword] = useState("");
