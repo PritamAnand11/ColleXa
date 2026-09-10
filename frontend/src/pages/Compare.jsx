@@ -1,6 +1,3 @@
-// frontend/src/pages/Compare.jsx
-// ── Full file with AI Verdict feature added ──────────────────
-
 import React, { useEffect, useState } from "react";
 import { getColleges } from "../services/api";
 import { motion, AnimatePresence } from "framer-motion";
@@ -49,8 +46,6 @@ const THEMES = {
     verdictItem:"rgba(108,99,255,0.04)",verdictItemBorder:"rgba(108,99,255,0.1)",
   },
 };
-
-// ── AI Verdict Categories ──────────────────────────────────────
 const VERDICT_CATEGORIES = [
   { key:"overall",    label:"Overall Verdict",      icon:"🏆", prompt:"overall strengths and weaknesses" },
   { key:"placements", label:"Placements & Career",  icon:"💼", prompt:"placements and career opportunities" },
@@ -60,7 +55,6 @@ const VERDICT_CATEGORIES = [
   { key:"future",     label:"Future Scope",         icon:"🚀", prompt:"future career scope and alumni network" },
 ];
 
-// ── Parse bullet lines from AI response ───────────────────────
 const parseVerdict = (text, nameA, nameB) => {
   const lines = text
     .split("\n")
@@ -77,8 +71,6 @@ const parseVerdict = (text, nameA, nameB) => {
     return { text: line, winner };
   });
 };
-
-// ══ AI VERDICT PANEL ══════════════════════════════════════════
 function AIVerdictPanel({ collegeA, collegeB, C }) {
   const [activeCategory, setActiveCategory] = useState(null);
   const [verdicts,        setVerdicts]       = useState({});
@@ -87,7 +79,6 @@ function AIVerdictPanel({ collegeA, collegeB, C }) {
   const nameB = collegeB.name.split(" ")[0];
 
   const fetchVerdict = async (category) => {
-    // Toggle off if already showing
     if (verdicts[category.key]?.lines) {
       setActiveCategory(prev => prev === category.key ? null : category.key);
       return;
