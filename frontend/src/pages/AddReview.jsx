@@ -1,8 +1,3 @@
-// ============================================================
-// frontend/src/pages/AddReview.jsx  — UPDATED
-// Replace your existing AddReview.jsx with this file.
-// Adds: Public vs Unfiltered Mode choice + VerificationModal
-// ============================================================
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -38,14 +33,12 @@ export default function AddReview() {
   const navigate          = useNavigate();
   const [theme, setTheme] = useState(getTheme());
 
-  // Step: "type" | "verify" | "form" | "success"
   const [step,        setStep]        = useState("type");
   const [reviewType,  setReviewType]  = useState("public"); // "public" | "unfiltered"
   const [college,     setCollege]     = useState(null);
   const [showVerify,  setShowVerify]  = useState(false);
   const [verifyData,  setVerifyData]  = useState(null); // returned from VerificationModal
 
-  // Form state
   const [ratings, setRatings] = useState({ overall: 0, faculty: 0, placement: 0, infra: 0, hostel: 0 });
   const [text,    setText]    = useState("");
   const [pros,    setPros]    = useState("");
@@ -83,7 +76,6 @@ export default function AddReview() {
     );
   }
 
-  // ── Styles ─────────────────────────────────────────────────
   const S = {
     page: { minHeight: "100vh", background: d ? "#0F0E1A" : "#F5F3FF", fontFamily: "Arial, sans-serif", padding: "40px 20px 80px" },
     wrap: { maxWidth: 680, margin: "0 auto" },
@@ -107,7 +99,6 @@ export default function AddReview() {
     }),
   };
 
-  // ── Handlers ───────────────────────────────────────────────
   const handleTypeSelect = (type) => {
     setReviewType(type);
     if (type === "public") {
@@ -146,7 +137,6 @@ export default function AddReview() {
     } finally { setLoading(false); }
   };
 
-  // ── STEP: Type selection ────────────────────────────────────
   if (step === "type") return (
     <div style={S.page}>
       <div style={S.wrap}>
