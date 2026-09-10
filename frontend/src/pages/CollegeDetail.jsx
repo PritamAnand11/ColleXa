@@ -1,5 +1,3 @@
-// frontend/src/pages/CollegeDetail.jsx
-
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import API from "../services/api";
@@ -18,9 +16,6 @@ import {
 } from "recharts";
 import { motion, AnimatePresence } from "framer-motion";
 
-/* =========================================================
-   THEME
-========================================================= */
 const getTheme = () =>
   document.documentElement.getAttribute("data-theme") === "dark" ||
   document.body.getAttribute("data-theme") === "dark"
@@ -123,9 +118,6 @@ const T = {
 
 const BAR_COLORS = ["#7c3aed", "#2563eb", "#d97706", "#dc2626"];
 
-/* =========================================================
-   STAR DISPLAY
-========================================================= */
 function Stars({ value, size = 14 }) {
   return (
     <span style={{ fontSize: size, letterSpacing: 1 }}>
@@ -136,9 +128,6 @@ function Stars({ value, size = 14 }) {
   );
 }
 
-/* =========================================================
-   MAIN COMPONENT
-========================================================= */
 export default function CollegeDetail() {
   const { id }     = useParams();
   const navigate   = useNavigate();
@@ -746,10 +735,6 @@ function LoadingSkeleton({ theme }) {
   );
 }
 
-
-/* =========================================================
-   ERROR STATE
-========================================================= */
 function ErrorState({ message, onRetry, theme }) {
   const page = theme === "dark"
     ? "linear-gradient(135deg,#0f0f1a 0%,#1a1a2e 50%,#16213e 100%)"
