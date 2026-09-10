@@ -2,14 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 
-// ── Theme helper (same pattern used across ColleXa) ──────────
 const getTheme = () =>
   document.documentElement.getAttribute("data-theme") === "dark" ||
   document.body.getAttribute("data-theme") === "dark"
     ? "dark"
     : "light";
 
-// ── Quiz Steps Definition ─────────────────────────────────────
 const STEPS = [
   {
     id: "interests",
@@ -115,8 +113,6 @@ export default function CollegeForMe() {
   }, [phase]);
 
   const d = theme === "dark";
-
-  // ── Styles ────────────────────────────────────────────────────
   const S = {
     page: {
       minHeight: "100vh",
@@ -473,7 +469,6 @@ export default function CollegeForMe() {
     setError("");
   };
 
-  // ── Render: Landing ───────────────────────────────────────────
   if (phase === "landing") {
     return (
       <div style={S.page}>
