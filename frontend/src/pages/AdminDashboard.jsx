@@ -75,16 +75,10 @@ export default function AdminDashboard() {
 
       <h1>Admin Dashboard</h1>
 
-      {/* ============================= */}
-      {/* Unfiltered Mode Verification */}
-      {/* ============================= */}
       <AdminVerification />
 
       <hr style={{ margin: "30px 0" }} />
 
-      {/* ============================= */}
-      {/* Add College Section */}
-      {/* ============================= */}
       <h3>Add College</h3>
 
       <input
@@ -123,9 +117,7 @@ export default function AdminDashboard() {
 
       <hr style={{ margin: "30px 0" }} />
 
-      {/* ============================= */}
-      {/* All Colleges Section */}
-      {/* ============================= */}
+
       <h3>All Colleges</h3>
 
       {colleges.length === 0 ? (
