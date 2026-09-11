@@ -1,9 +1,3 @@
-// ============================================================
-// frontend/src/components/AdminVerification.jsx  — NEW
-// Add inside your AdminDashboard.jsx:
-//   import AdminVerification from "./AdminVerification";
-//   <AdminVerification />
-// ============================================================
 import React, { useState, useEffect } from "react";
 import API from "../services/api";
 
@@ -29,7 +23,6 @@ function StatusBadge({ status }) {
     </span>
   );
 }
-
 export default function AdminVerification() {
   const [theme,    setTheme]    = useState(getTheme());
   const [reviews,  setReviews]  = useState([]);
@@ -82,8 +75,7 @@ export default function AdminVerification() {
     } catch { setMessage("❌ Failed to reject."); }
     finally { setWorking(false); }
   };
-
-  // ── Styles ─────────────────────────────────────────────────
+  
   const S = {
     wrap: { fontFamily: "Arial, sans-serif" },
     header: {
