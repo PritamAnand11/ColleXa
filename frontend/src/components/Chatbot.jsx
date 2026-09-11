@@ -1,12 +1,7 @@
-// frontend/src/components/Chatbot.jsx
-
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 
-/* =========================================================
-   SUGGESTION CHIPS  (shown after greeting)
-========================================================= */
 const SUGGESTIONS = [
   "IIT JEE cutoffs for CSE ",
   "Compare IIT Bombay vs IIT Delhi ",
@@ -16,9 +11,6 @@ const SUGGESTIONS = [
   "Top NITs for ECE branch ",
 ];
 
-/* =========================================================
-   TYPING DOTS
-========================================================= */
 function TypingDots() {
   return (
     <div style={{ display: "flex", gap: 5, padding: "2px 2px", alignItems: "center" }}>
@@ -37,22 +29,12 @@ function TypingDots() {
   );
 }
 
-/* =========================================================
-   INLINE BOLD PARSER  — turns **text** into <strong>
-========================================================= */
 function inlineBold(text) {
-  // Also strip any stray leading * or # that aren't part of markdown syntax
   return text
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.*?)\*/g, "<em>$1</em>");
 }
 
-/* =========================================================
-   PARSE & RENDER AI TEXT  — full markdown-aware renderer
-   Handles: headings (#), bold bullets (* **Heading:**),
-   plain bullets (- / * / •), numbered lists, blank lines,
-   inline bold/italic
-========================================================= */
 function BotText({ text }) {
   // Normalize: collapse 3+ newlines → 2
   const normalized = text.replace(/\n{3,}/g, "\n\n").trim();
@@ -150,7 +132,6 @@ function BotText({ text }) {
       continue;
     }
 
-    // ── numbered list:  1. or 1)
     const numMatch = line.match(/^(\d+)[.)]\s+(.+)$/);
     if (numMatch) {
       elements.push(
@@ -181,7 +162,6 @@ function BotText({ text }) {
       continue;
     }
 
-    // ── plain paragraph (strip any lone leading * that slipped through)
     const cleanLine = line.replace(/^\*+\s*/, "");
     elements.push(
       <p key={i} style={{ margin: "0 0 4px", fontSize: 13.5, color: "#1e1e2e", lineHeight: 1.7 }}
@@ -194,9 +174,6 @@ function BotText({ text }) {
   return <div style={{ margin: 0 }}>{elements}</div>;
 }
 
-/* =========================================================
-   MAIN COMPONENT
-========================================================= */
 export default function Chatbot() {
   const [open,     setOpen]     = useState(false);
   const [messages, setMessages] = useState([]);
@@ -208,12 +185,10 @@ export default function Chatbot() {
   const bottomRef = useRef(null);
   const inputRef  = useRef(null);
 
-  /* scroll to bottom on new message */
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  /* focus + clear unread when opened */
   useEffect(() => {
     if (open) {
       setUnread(0);
@@ -221,7 +196,6 @@ export default function Chatbot() {
     }
   }, [open]);
 
-  /* greeting message on first open */
   useEffect(() => {
     if (open && messages.length === 0) {
       setMessages([{
@@ -232,10 +206,8 @@ export default function Chatbot() {
     }
   }, [open]);
 
-  /* ── send message ── */
   const sendMessage = async (text) => {
     const msg = (text || input).trim();
-    // strip emoji suffix from suggestion chips
     const cleanMsg = msg.replace(/\s[\u{1F300}-\u{1FAFF}]/gu, "").trim();
     if (!cleanMsg || loading) return;
 
@@ -283,14 +255,8 @@ export default function Chatbot() {
     }]), 80);
   };
 
-  /* ─────────────────────────────────────────────
-     RENDER
-  ───────────────────────────────────────────── */
   return (
     <>
-      {/* ════════════════════════════════
-          CHAT WINDOW
-      ════════════════════════════════ */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -413,7 +379,6 @@ export default function Chatbot() {
                 </svg>
               </div>
             </div>
-
 
             {/* ══ MESSAGES AREA ══ */}
             <div
