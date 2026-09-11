@@ -5,26 +5,17 @@ const API = axios.create({
   withCredentials: false
 });
 
-
 // attach token automatically
 API.interceptors.request.use((req) => {
-
   const user = localStorage.getItem("user");
-
   if (user) {
-
     req.headers.Authorization =
       `Bearer ${JSON.parse(user).token}`;
-
   }
-
   return req;
-
 });
 
-
 // ✅ ADD THESE EXPORTS
-
 export const getColleges = () =>
   API.get("/colleges");
 
