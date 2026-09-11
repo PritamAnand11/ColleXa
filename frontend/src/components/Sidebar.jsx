@@ -5,9 +5,6 @@ import { AuthContext } from "../context/AuthContext";
 
 import { Link } from "react-router-dom";
 
-/* =========================================================
-   THEME
-========================================================= */
 const getTheme = () =>
   document.documentElement.getAttribute("data-theme") === "dark" ||
   document.body.getAttribute("data-theme") === "dark"
@@ -70,11 +67,6 @@ const T = {
   },
 };
 
-/* =========================================================
-   NAV ITEMS CONFIG
-   ✅ FIX: Every item now has a proper `key` property
-   ✅ FIX: College For Me added correctly with key="collegeforme"
-========================================================= */
 const NAV_ITEMS = [
   { key: "search",       icon: "🔍", label: "New Search"        },
   { key: "history",      icon: "🕐", label: "Search History"    },
@@ -93,12 +85,6 @@ const NAV_ITEMS = [
   { key: "help",         icon: "❓", label: "Help & FAQ"        },
 ];
 
-
-
-
-/* =========================================================
-   ABOUT US CONTENT
-========================================================= */
 const ABOUT_CONTENT = `ColleXa is India's smartest college discovery platform, built by students, for students.
 
 We combine real peer reviews, AI-powered insights, and verified placement data to help you make the most important decision of your life — choosing the right college.
@@ -107,9 +93,6 @@ We combine real peer reviews, AI-powered insights, and verified placement data t
 
 Built with ❤️ using React, Node.js, MongoDB and Groq AI.`;
 
-/* =========================================================
-   HELP FAQ
-========================================================= */
 const FAQS = [
   { q: "How do I search for a college?",  a: "Use the search bar on the homepage. Type the college name or location and press Search." },
   { q: "Are the reviews verified?",        a: "Reviews are submitted by registered students. Verified badge is given to students who confirm their college email." },
@@ -118,9 +101,6 @@ const FAQS = [
   { q: "How do I write a review?",         a: "Visit any college page and click the '✏️ Write Review' button. You need to be logged in." },
 ];
 
-/* =========================================================
-   PLACEMENT TRENDS MINI CHART
-========================================================= */
 import {
   LineChart, Line, XAxis, YAxis, Tooltip,
   ResponsiveContainer, CartesianGrid,
@@ -182,10 +162,6 @@ function PlacementTrends({ C }) {
     </div>
   );
 }
-
-/* =========================================================
-   MAIN SIDEBAR COMPONENT
-========================================================= */
 export default function Sidebar({ open, setOpen }) {
   const { user }  = useContext(AuthContext);
   const navigate  = useNavigate();
@@ -234,26 +210,23 @@ export default function Sidebar({ open, setOpen }) {
     }
     if (key === "compare")      { setOpen(false); navigate("/compare");        return; }
     if (key === "reviews")      { setOpen(false); navigate("/");               return; }
-    if (key === "collegeforme") { setOpen(false); navigate("/college-for-me"); return; } // ✅ NEW
+    if (key === "collegeforme") { setOpen(false); navigate("/college-for-me"); return; }
     if (key === "ai") {
       setOpen(false);
       setTimeout(() => document.querySelector(".collexa-fab")?.click(), 300);
       return;
     }
   };
-
   const clearHistory = () => {
     localStorage.removeItem("collexa_search_history");
     setHistory([]);
   };
-
   const removeHistoryItem = (idx) => {
     const updated = history.filter((_, i) => i !== idx);
     localStorage.setItem("collexa_search_history", JSON.stringify(updated));
     setHistory(updated);
   };
-
-  /* ── Expandable section renderer ── */
+   
   const renderExpanded = (key) => {
     if (expandedKey !== key) return null;
 
@@ -386,9 +359,6 @@ export default function Sidebar({ open, setOpen }) {
     return null;
   };
 
-  /* =========================================================
-     RENDER
-  ========================================================= */
   return (
     <>
       <AnimatePresence>
