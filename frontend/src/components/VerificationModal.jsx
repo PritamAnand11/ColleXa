@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import API from "../services/api";
-
 const getTheme = () =>
   document.documentElement.getAttribute("data-theme") === "dark" ||
   document.body.getAttribute("data-theme") === "dark" ? "dark" : "light";
-
 export default function VerificationModal({ college, userId, onVerified, onClose }) {
   const [theme,   setTheme]   = useState(getTheme());
   const [method,  setMethod]  = useState(null); // "email" | "upload"
@@ -12,16 +10,13 @@ export default function VerificationModal({ college, userId, onVerified, onClose
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState("");
 
-  // Email flow state
   const [collegeEmail,  setCollegeEmail]  = useState("");
   const [otpCode,       setOtpCode]       = useState("");
   const [otpSent,       setOtpSent]       = useState(false);
 
-  // ID upload state
   const [file,     setFile]    = useState(null);
   const [fileErr,  setFileErr] = useState("");
 
-  // Shared
   const [studentType,     setStudentType]     = useState("student");
   const [department,      setDepartment]      = useState("");
   const [graduationYear,  setGraduationYear]  = useState("");
@@ -35,7 +30,6 @@ export default function VerificationModal({ college, userId, onVerified, onClose
     return () => obs.disconnect();
   }, []);
 
-  // ── Styles ─────────────────────────────────────────────────
   const overlay = {
     position: "fixed", inset: 0, background: "rgba(0,0,0,0.65)",
     zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center",
@@ -77,8 +71,6 @@ export default function VerificationModal({ college, userId, onVerified, onClose
     transition: "all 0.2s", marginBottom: 12,
     display: "flex", alignItems: "center", gap: 14,
   });
-
-  // ── Handlers ───────────────────────────────────────────────
   const handleSendOTP = async () => {
     if (!collegeEmail.includes("@")) { setError("Enter a valid college email."); return; }
     setLoading(true); setError("");
