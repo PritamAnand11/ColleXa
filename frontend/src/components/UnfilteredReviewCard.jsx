@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-
 const getTheme = () =>
   document.documentElement.getAttribute("data-theme") === "dark" ||
   document.body.getAttribute("data-theme") === "dark" ? "dark" : "light";
-
-// Star rating display
 function Stars({ rating, size = 14 }) {
   return (
     <span>
@@ -14,8 +11,6 @@ function Stars({ rating, size = 14 }) {
     </span>
   );
 }
-
-// Verification badge
 function VerifiedBadge({ studentType, verificationMethod, department, graduationYear }) {
   const isAlumni  = studentType === "alumni";
   const isEmail   = verificationMethod === "college_email";
@@ -48,7 +43,6 @@ function VerifiedBadge({ studentType, verificationMethod, department, graduation
     </div>
   );
 }
-
 export default function UnfilteredReviewCard({ review }) {
   const [expanded, setExpanded] = useState(false);
   const d = document.documentElement.getAttribute("data-theme") === "dark" ||
@@ -92,7 +86,6 @@ export default function UnfilteredReviewCard({ review }) {
         background: "linear-gradient(90deg, #4F46E5, #7C3AED, #0891B2)",
       }} />
 
-      {/* Top row: author + rating + date */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12, flexWrap: "wrap", gap: 8 }}>
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
@@ -130,8 +123,6 @@ export default function UnfilteredReviewCard({ review }) {
           </div>
         </div>
       </div>
-
-      {/* Review text */}
       <p style={{ fontSize: 14, lineHeight: 1.75, color: d ? "#D4D2F0" : "#374151", margin: "14px 0", fontStyle: "italic" }}>
         "{displayText}"
       </p>
@@ -159,8 +150,6 @@ export default function UnfilteredReviewCard({ review }) {
           )}
         </div>
       )}
-
-      {/* Sub-ratings */}
       {(review.facultyRating || review.placementRating || review.infraRating || review.hostelRating) && (
         <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 14, paddingTop: 12, borderTop: `1px solid ${d ? "#2D2B50" : "#EEE"}` }}>
           {[
