@@ -1,9 +1,3 @@
-// ============================================================
-// frontend/src/components/UnfilteredSection.jsx  — NEW
-// Add inside CollegeDetail.jsx:
-//   import UnfilteredSection from "../components/UnfilteredSection";
-//   <UnfilteredSection collegeId={college._id} />
-// ============================================================
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
@@ -13,7 +7,6 @@ const getTheme = () =>
   document.documentElement.getAttribute("data-theme") === "dark" ||
   document.body.getAttribute("data-theme") === "dark" ? "dark" : "light";
 
-// ── Stat pill ────────────────────────────────────────────────
 function StatPill({ icon, label, value, color }) {
   return (
     <div style={{
@@ -53,7 +46,6 @@ export default function UnfilteredSection({ collegeId }) {
       .finally(() => setLoading(false));
   }, [collegeId]);
 
-  // ── Derived stats ─────────────────────────────────────────
   const count    = reviews.length;
   const avgRating = count
     ? (reviews.reduce((s, r) => s + (r.overallRating || 0), 0) / count).toFixed(1)
@@ -64,7 +56,6 @@ export default function UnfilteredSection({ collegeId }) {
 
   const displayedReviews = expanded ? reviews : reviews.slice(0, 3);
 
-  // ── Styles ────────────────────────────────────────────────
   const S = {
     wrap: {
       marginTop: 36,
@@ -238,8 +229,6 @@ export default function UnfilteredSection({ collegeId }) {
             )}
           </>
         )}
-
-        {/* Bottom disclaimer */}
         <div style={{ marginTop: 20, fontSize: 11, color: d ? "#6B7280" : "#9CA3AF", textAlign: "center" }}>
           🔥 Unfiltered Mode is ColleXa's verified-only review section — powered by email domain verification & admin-approved ID checks.
         </div>
