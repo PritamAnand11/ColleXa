@@ -129,9 +129,6 @@ function AvatarCircle({ src, name, size = 88, editable = false, onUpload }) {
   );
 }
 
-/* =========================================================
-   INFO ROW
-========================================================= */
 function InfoRow({ icon, label, value, C }) {
   return (
     <div style={{
