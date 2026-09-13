@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import API from "../services/api";
-
-// ── Theme helper ─────────────────────────────────────────────
 const getTheme = () =>
   document.documentElement.getAttribute("data-theme") === "dark" ||
   document.body.getAttribute("data-theme") === "dark"
     ? "dark"
     : "light";
-
-// ── Gap severity ─────────────────────────────────────────────
 const getGapLevel = (official, reality) => {
   const gap = official - reality;
   if (gap >= 1.5) return { label: "Large Gap", color: "#EF4444", bg: "#FEE2E2", icon: "🚨" };
@@ -17,7 +13,6 @@ const getGapLevel = (official, reality) => {
   return { label: "Accurate", color: "#10B981", bg: "#D1FAE5", icon: "✅" };
 };
 
-// ── Score Bar ─────────────────────────────────────────────────
 function ScoreBar({ label, value, max = 5, color, d }) {
   const pct = Math.min((value / max) * 100, 100);
   return (
@@ -45,7 +40,6 @@ function ScoreBar({ label, value, max = 5, color, d }) {
   );
 }
 
-// ── Gap Meter ────────────────────────────────────────────────
 function GapMeter({ official, reality, d }) {
   const gap = official - reality;
   const severity = getGapLevel(official, reality);
@@ -115,7 +109,6 @@ function GapMeter({ official, reality, d }) {
   );
 }
 
-// ── Main Component ────────────────────────────────────────────
 export default function TruthLayer({ college, reviews = [] }) {
   const [theme,    setTheme]    = useState(getTheme());
   const [loading,  setLoading]  = useState(false);
@@ -125,7 +118,6 @@ export default function TruthLayer({ college, reviews = [] }) {
 
   const d = theme === "dark";
 
-  // Theme observer
   useEffect(() => {
     const obs = new MutationObserver(() => setTheme(getTheme()));
     obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
@@ -135,13 +127,9 @@ export default function TruthLayer({ college, reviews = [] }) {
 
   if (!college) return null;
 
-  // ── Derived values ──────────────────────────────────────────
-  // Official = what the college markets (we use their overall rating)
-  // Reality  = average from actual student reviews
   const officialRating  = college.overallRating || 0;
   const reviewCount     = reviews.length;
 
-  // Reality scores computed from reviews
   const avg = (key) => {
     if (!reviews.length) return 0;
     const vals = reviews.map(r => r[key]).filter(v => v > 0);
@@ -154,17 +142,14 @@ export default function TruthLayer({ college, reviews = [] }) {
   const realityInfra      = avg("infraRating");
   const realityHostel     = avg("hostelRating");
 
-  // Use official overall vs real overall as the headline gap
   const displayOfficial = officialRating;
   const displayReality  = realityOverall > 0 ? realityOverall : officialRating;
 
-  // ── Fetch AI insight ────────────────────────────────────────
   const fetchInsight = async () => {
     if (reviewCount === 0) {
       setError("No reviews available yet. Add reviews to unlock The Truth Layer.");
       return;
     }
-
     setLoading(true);
     setError("");
 
