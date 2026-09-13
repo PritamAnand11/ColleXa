@@ -1,12 +1,7 @@
-// frontend/src/components/StudentProfile.jsx
-
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AuthContext } from "../context/AuthContext";
 
-/* =========================================================
-   THEME
-========================================================= */
 const getTheme = () =>
   document.documentElement.getAttribute("data-theme") === "dark" ||
   document.body.getAttribute("data-theme") === "dark"
@@ -61,9 +56,6 @@ const T = {
   },
 };
 
-/* =========================================================
-   AVATAR COMPONENT
-========================================================= */
 function AvatarCircle({ src, name, size = 88, editable = false, onUpload }) {
   const inputRef = useRef(null);
   const initials = name ? name.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2) : "?";
@@ -175,9 +167,6 @@ function InfoRow({ icon, label, value, C }) {
   );
 }
 
-/* =========================================================
-   EDITABLE FIELD
-========================================================= */
 function EditField({ label, value, onChange, type = "text", placeholder, C }) {
   return (
     <div style={{ marginBottom: 14 }}>
@@ -215,9 +204,6 @@ function EditField({ label, value, onChange, type = "text", placeholder, C }) {
   );
 }
 
-/* =========================================================
-   MAIN COMPONENT
-========================================================= */
 export default function StudentProfile({ open, onClose }) {
   const { user, logout } = useContext(AuthContext);
   const [theme,    setTheme]    = useState(getTheme);
